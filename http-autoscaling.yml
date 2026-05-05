@@ -1,14 +1,16 @@
 kind: HTTPScaledObject
 apiVersion: http.keda.sh/v1alpha1
 metadata:
-    name: nginx-app-http
+  name: nginx-app-http
 spec:
-    hosts:
-        - myhost.com
-    scaleTargetRef:
-        deployment: nginx-app
-        service: nginx-app
-        port: 80
-    replicas:
-        min: 1
-        max: 10
+  hosts:
+    - myhost.com
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-app
+    service: nginx-app
+    port: 80
+  replicas:
+    min: 0
+    max: 10
